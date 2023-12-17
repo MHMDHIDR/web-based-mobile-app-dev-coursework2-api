@@ -3,21 +3,21 @@ import connectDB from '../utils/db.js'
 
 const router = express.Router()
 
-// GET /lessons
+// GET /orders
 router.get('/', async (_req, res) => {
   try {
     await connectDB().then(db => {
       db.collection('lesson')
         .find()
         .toArray()
-        .then(lessons => res.json(lessons))
+        .then(orders => res.json(orders))
     })
   } catch (err) {
     res.status(500).json({ error: 'Internal Server Error' })
   }
 })
 
-// GET /lessons/:id
+// GET /orders/:id
 router.get('/:id', async (req, res) => {
   const { id: _id } = req.params
   try {
@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-// POST /lessons
+// POST /orders
 router.post('/', async (req, res) => {
   try {
     await connectDB().then(db => {
@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-// PUT /lessons/:id
+// PUT /orders/:id
 router.put('/:id', async (req, res) => {
   try {
     await connectDB().then(db => {
