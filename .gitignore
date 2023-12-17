@@ -14,3 +14,5 @@
 
 # Add all node_modules folders to the .gitignore
 **/node_modules
+# env files
+.env
