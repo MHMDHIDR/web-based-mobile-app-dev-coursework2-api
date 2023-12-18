@@ -1,13 +1,14 @@
 import express from 'express'
+import { ObjectId } from 'mongodb'
 import { dbConnect } from '../utils/db.js'
 
 const router = express.Router()
 
-// GET /orders
+// GET All  /orders
 router.get('/', async (_req, res) => {
   try {
     await dbConnect().then(db => {
-      db.collection('lesson')
+      db.collection('order')
         .find()
         .toArray()
         .then(orders => res.json(orders))
@@ -17,40 +18,19 @@ router.get('/', async (_req, res) => {
   }
 })
 
-// GET /orders/:id
-router.get('/:id', async (req, res) => {
-  const { id: _id } = req.params
-  try {
-    await dbConnect().then(db => {
-      db.collection('lesson')
-        .findOne({ _id })
-        .then(lesson => res.json(lesson))
-    })
-  } catch (err) {
-    res.status(500).json({ error: 'Internal Server Error' })
-  }
-})
-
-// POST /orders
+// Add (POST) new /orders
 router.post('/', async (req, res) => {
-  try {
-    await dbConnect().then(db => {
-      db.collection('lesson')
-        .insertOne(req.body)
-        .then(lesson => res.json(lesson))
-    })
-  } catch (err) {
-    res.status(500).json({ error: 'Internal Server Error' })
-  }
-})
+  let { name, phone, orderedLessons } = req.body
+  orderedLessons = orderedLessons.map(({ _id, spaces }) => ({
+    _id: new ObjectId(_id),
+    spaces
+  }))
 
-// PUT /orders/:id
-router.put('/:id', async (req, res) => {
   try {
     await dbConnect().then(db => {
-      db.collection('lesson')
-        .updateOne({ _id: req.params.id }, { $set: req.body })
-        .then(lesson => res.json(lesson))
+      db.collection('order')
+        .insertOne({ name, phone, orderedLessons })
+        .then(lessons => res.json(lessons))
     })
   } catch (err) {
     res.status(500).json({ error: 'Internal Server Error' })
