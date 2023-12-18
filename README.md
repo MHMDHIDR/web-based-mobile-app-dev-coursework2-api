@@ -3,8 +3,8 @@
 > To Access this repo online click [here](https://github.com/MHMDHIDR/web-based-mobile-app-dev-coursework2-api)\
 > **or Copy this link: https://github.com/MHMDHIDR/web-based-mobile-app-dev-coursework2-api**
 
-> To view the project online click [here](https://mhmdhidr.github.io/web-based-mobile-app-dev-coursework2-api)\
-> **or copy this link: https://mhmdhidr.github.io/web-based-mobile-app-dev-coursework2-api**
+> To view the project online click [here](https://github.com/MHMDHIDR/web-based-mobile-app-dev-coursework2)\
+> **or copy this link: https://github.com/MHMDHIDR/web-based-mobile-app-dev-coursework2**
 
 ## Project setup
 

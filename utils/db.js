@@ -2,7 +2,7 @@ import { MongoClient } from 'mongodb'
 
 const client = new MongoClient(process.env.MONGODB_URI)
 
-async function db() {
+async function dbConnect() {
   try {
     await client.connect()
     console.log('✅ MongoDB CONNECTED')
@@ -12,4 +12,13 @@ async function db() {
   }
 }
 
-export default db
+async function dbDisconnect() {
+  try {
+    await client.close()
+    console.log('🚫 MongoDB DISCONNECTED')
+  } catch (error) {
+    throw new Error('Error disconnecting from MongoDB')
+  }
+}
+
+export { dbConnect, dbDisconnect }

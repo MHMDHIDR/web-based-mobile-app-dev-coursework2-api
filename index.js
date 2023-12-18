@@ -16,8 +16,9 @@ app.use(
   })
 )
 app.use(express.json())
-app.use(logger('short'))
+app.use(logger('common'))
 
+// Routes
 app.use('/lessons', lessonsRouter)
 app.use('/orders', ordersRoutes)
 
