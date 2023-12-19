@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb'
 import { dbConnect } from '../utils/db.js'
 
-export const updateLessonsSpaces = async (req, res, next) => {
+export const updateLessonsSpaces = async (req, _res, next) => {
   const { orderedLessons } = req.body
 
   try {

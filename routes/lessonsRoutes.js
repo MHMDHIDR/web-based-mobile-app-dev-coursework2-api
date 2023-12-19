@@ -1,5 +1,6 @@
 import express from 'express'
 import { dbConnect } from '../utils/db.js'
+import { ObjectId } from 'mongodb'
 
 const router = express.Router()
 
@@ -23,11 +24,12 @@ router.get('/', (_req, res) => {
 // GET /lessons/:id
 router.get('/:id', async (req, res) => {
   const { id: _id } = req.params
+
   try {
-    await dbConnect().then(db => {
-      db.collection('lesson')
-        .findOne({ _id })
-        .then(lesson => res.json(lesson))
+    await dbConnect().then(async db => {
+      const lesson = await db.collection('lesson').findOne({ _id: new ObjectId(_id) })
+      if (!lesson) res.status(404).json({ error: 'Lesson not found' })
+      res.json(lesson)
     })
   } catch (err) {
     res.status(500).json({ error: 'Internal Server Error' })
@@ -49,10 +51,12 @@ router.post('/', async (req, res) => {
 
 // PUT /lessons/:id
 router.put('/:id', async (req, res) => {
+  const { id: _id } = req.params
+
   try {
     await dbConnect().then(db => {
       db.collection('lesson')
-        .updateOne({ _id: req.params.id }, { $set: req.body })
+        .updateOne({ _id: new ObjectId(_id) }, { $set: req.body })
         .then(lesson => res.json(lesson))
     })
   } catch (err) {
