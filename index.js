@@ -12,7 +12,7 @@ const PORT = process.env.PORT
 // Enable CORS to allow requests from the frontend
 app.use(
   cors({
-    // Allowed origin array to make requests
+    // Allowed origins array to make requests to the API
     origin: [
       `http://localhost:8080`,
       `http://127.0.0.1:8080`,
