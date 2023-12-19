@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
-import logger from 'morgan'
 import 'dotenv/config'
+import logger from './middleware/logger.js'
 import lessonsRouter from './routes/lessonsRoutes.js'
 import ordersRoutes from './routes/ordersRoutes.js'
 
@@ -16,7 +16,7 @@ app.use(
   })
 )
 app.use(express.json())
-app.use(logger('common'))
+app.use(logger('full'))
 
 // Routes
 app.use('/lessons', lessonsRouter)

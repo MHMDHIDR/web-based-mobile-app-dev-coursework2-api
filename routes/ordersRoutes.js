@@ -1,7 +1,6 @@
 import express from 'express'
 import { ObjectId } from 'mongodb'
 import { dbConnect } from '../utils/db.js'
-import { updateLessonsSpaces } from '../middleware/updateLessonsSpaces.js'
 
 const router = express.Router()
 
@@ -20,7 +19,7 @@ router.get('/', async (_req, res) => {
 })
 
 // Add (POST) a new /orders
-router.post('/', updateLessonsSpaces, (req, res) => {
+router.post('/', (req, res) => {
   let { name, phone, orderedLessons } = req.body
   orderedLessons = orderedLessons.map(({ _id, spaces }) => ({
     _id: new ObjectId(_id),

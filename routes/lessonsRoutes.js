@@ -49,6 +49,27 @@ router.post('/', async (req, res) => {
   }
 })
 
+// PUT /lessons (update spaces)
+router.put('/', async (req, res) => {
+  const { orderedLessons } = req.body
+
+  try {
+    for (const { _id, spaces } of orderedLessons) {
+      const db = await dbConnect()
+      const result = await db
+        .collection('lesson')
+        .updateOne({ _id: new ObjectId(_id) }, { $inc: { spaces: -spaces } })
+      if (result.modifiedCount === 0) {
+        res.status(404).json({ error: 'Lesson not found' })
+        return
+      }
+    }
+    res.json({ message: 'Lessons updated' })
+  } catch (err) {
+    console.error(err)
+  }
+})
+
 // PUT /lessons/:id
 router.put('/:id', async (req, res) => {
   const { id: _id } = req.params
