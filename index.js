@@ -4,6 +4,7 @@ import 'dotenv/config'
 import logger from './middleware/logger.js'
 import lessonsRouter from './routes/lessonsRoutes.js'
 import ordersRoutes from './routes/ordersRoutes.js'
+import searchRoutes from './routes/searchRoutes.js'
 
 const app = express()
 const PORT = process.env.PORT
@@ -21,6 +22,7 @@ app.use(logger('full'))
 // Routes
 app.use('/lessons', lessonsRouter)
 app.use('/orders', ordersRoutes)
+app.use('/search', searchRoutes)
 
 // Start the server
 app.listen(PORT, () => console.log(`✔ API Running http://localhost:${PORT}`))
