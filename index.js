@@ -13,7 +13,11 @@ const PORT = process.env.PORT
 app.use(
   cors({
     // Allowed origin array to make requests
-    origin: [`http://localhost:8080`, `http://127.0.0.1:8080`]
+    origin: [
+      `http://localhost:8080`,
+      `http://127.0.0.1:8080`,
+      `https://mhmdhidr.github.io`
+    ]
   })
 )
 app.use(express.json())
