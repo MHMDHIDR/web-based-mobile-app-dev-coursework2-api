@@ -3,26 +3,32 @@ import { dbConnect } from '../utils/db.js'
 
 const router = express.Router()
 
-// GET /search (search) for lessons by subject, location, price, or spaces
+// GET /search (search) for lessons
 router.get('/', async (req, res) => {
-  const { query } = req.query
+  let { query } = req.query
 
   try {
     await dbConnect().then(async db => {
-      const lessons = await db
-        .collection('lesson')
+      const lessons = db.collection('lesson')
+
+      // Creating a regex pattern to perform case-insensitive search
+      const regexQuery = new RegExp(query, 'i')
+
+      const searchResult = await lessons
         .find({
           $or: [
-            { subject: { $regex: new RegExp(query, 'i') } },
-            { location: { $regex: new RegExp(query, 'i') } },
-            { price: { $regex: new RegExp(query, 'i') } },
-            { spaces: { $regex: new RegExp(query, 'i') } }
+            { subject: regexQuery },
+            { location: regexQuery },
+            { price: parseInt(query) || 0 },
+            { spaces: parseInt(query) || 0 }
           ]
         })
         .toArray()
 
-      if (!lessons) res.status(404).json({ error: 'Lesson not found' })
-      res.json(lessons)
+      // if no lessons are found, return 404
+      searchResult.length === 0
+        ? res.status(404).json({ message: 'No lessons found' })
+        : res.json(searchResult)
     })
   } catch (err) {
     res.status(500).json(err)
