@@ -28,7 +28,10 @@ router.get('/:id', async (req, res) => {
   try {
     await dbConnect().then(async db => {
       const lesson = await db.collection('lesson').findOne({ _id: new ObjectId(_id) })
-      if (!lesson) res.status(404).json({ error: 'Lesson not found' })
+      if (!lesson) {
+        res.status(404).json({ error: 'Lesson not found' })
+        return
+      }
       res.json(lesson)
     })
   } catch (err) {
