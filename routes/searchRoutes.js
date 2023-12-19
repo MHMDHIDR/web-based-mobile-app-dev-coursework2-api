@@ -11,13 +11,21 @@ router.get('/', async (req, res) => {
     await dbConnect().then(async db => {
       const lessons = await db
         .collection('lesson')
-        .find({ $text: { $search: query } })
+        .find({
+          $or: [
+            { subject: { $regex: new RegExp(query, 'i') } },
+            { location: { $regex: new RegExp(query, 'i') } },
+            { price: { $regex: new RegExp(query, 'i') } },
+            { spaces: { $regex: new RegExp(query, 'i') } }
+          ]
+        })
         .toArray()
+
       if (!lessons) res.status(404).json({ error: 'Lesson not found' })
       res.json(lessons)
     })
   } catch (err) {
-    res.status(500).json({ error: 'Internal Server Error' })
+    res.status(500).json(err)
   }
 })
 
