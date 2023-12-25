@@ -1,7 +1,7 @@
 {
   "name": "api",
   "description": "API for Web Based Mobile App Dev Coursework2",
-  "packageManager": "yarn@3.5.1",
+  "packageManager": "pnpm@8.12.1",
   "type": "module",
   "scripts": {
     "start": "node index",
