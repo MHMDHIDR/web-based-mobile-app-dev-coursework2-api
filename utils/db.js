@@ -6,7 +6,7 @@ async function dbConnect() {
   try {
     await client.connect()
     console.log('✅ MongoDB CONNECTED')
-    return client.db('lessons_booking_system')
+    return client.db('after_school_booking_system')
   } catch (error) {
     throw new Error('Error connecting to MongoDB')
   }
