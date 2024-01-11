@@ -1,4 +1,10 @@
-// logger.js
+/**
+ * A custom logger middleware to log the request
+ * It loggs the request method, url, body and the date
+ *
+ * @param {*} format
+ * @returns {Function} next
+ */
 const logger = format => (req, _res, next) => {
   const { method, url, body } = req
   const dateCommon = new Date().toISOString()

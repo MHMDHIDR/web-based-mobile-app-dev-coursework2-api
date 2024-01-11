@@ -23,6 +23,9 @@ app.use(
 app.use(express.json())
 app.use(logger('full'))
 
+// Serve static images from public directory (Images for the lessons)
+app.use(express.static('public'))
+
 // Routes
 app.use('/lessons', lessonsRouter)
 app.use('/orders', ordersRoutes)
