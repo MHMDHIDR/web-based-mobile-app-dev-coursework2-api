@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
 
       const searchResult = await lessons
         .find({
+          // Search in the following fields for the query
           $or: [
             { subject: regexQuery },
             { location: regexQuery },
@@ -25,7 +26,7 @@ router.get('/', async (req, res) => {
         })
         .toArray()
 
-      // if no lessons are found, return 404
+      // if no lessons are found, return 404 (Not Found)
       searchResult.length === 0
         ? res.status(404).json({ message: 'No lessons found' })
         : res.json(searchResult)

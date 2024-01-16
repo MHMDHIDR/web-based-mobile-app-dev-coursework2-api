@@ -4,7 +4,7 @@
   "packageManager": "pnpm@8.12.1",
   "type": "module",
   "scripts": {
-    "start": "node index",
+    "start": "node index.js",
     "dev": "nodemon index"
   },
   "repository": {
