@@ -15,6 +15,10 @@
 > \
 > https://cst3145-lessons-booking-system.eu-west-2.elasticbeanstalk.com/lessons**
 
+##### The API for getting After School Online Lessons from AWS Elastic Beanstalk
+
+<image src='./public/images/api_endpoint.png' width='100%' height='auto' alt='After School Online Lessons Booking System'>
+
 ## Project setup
 
 open terminal in MacOS or git bash in windows and run the following command
